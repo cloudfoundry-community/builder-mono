@@ -1,0 +1,19 @@
+---
+apt_upgrade: true
+packages:
+ - git-core
+ - build-essential
+ - g++ 
+ - libtool 
+ - libopenssl-ruby
+ - libxml2-dev 
+ - libxslt-dev
+ - libxtst-dev
+ - gettext 
+ - pkg-config 
+ - automake
+ - ruby
+ - ruby-dev
+ - rubygems
+ - zip
+output: {all: '| tee -a /var/log/cloud-init-output.log'}

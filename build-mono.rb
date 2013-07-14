@@ -6,20 +6,10 @@ require 'slop'
 KEY_NAME = 'Cloud Foundry'
 
 VERSION_SPECIFIC = {
-  :six => {
-    :repository => 'http://hg.openjdk.java.net/jdk6/jdk6',
-    :cloud_config => 'cloud-config-6and7.yml',
-    :remote_build => 'remote-build-6and7.rb'
-  },
-  :seven => {
-    :repository => 'http://hg.openjdk.java.net/jdk7u/jdk7u',
-    :cloud_config => 'cloud-config-6and7.yml',
-    :remote_build => 'remote-build-6and7.rb'
-  },
-  :eight => {
-    :repository => 'http://hg.openjdk.java.net/jdk8/jdk8',
-    :cloud_config => 'cloud-config-8.yml',
-    :remote_build => 'remote-build-8.rb'
+  :three => {
+    :repository => 'https://github.com/mono/mono.git',
+    :cloud_config => 'cloud-config-3.yml',
+    :remote_build => 'remote-build-3.rb'
   }
 }
 
@@ -54,21 +44,16 @@ Content-Disposition: attachment
 
   multipart
     .gsub(/@@ACCESS_KEY@@/, options[:access_key])
-    .gsub(/@@BUCKET@@/, options[:bucket])
-    .gsub(/@@BUILD_NUMBER@@/, options[:build_number])
-    .gsub(/@@VERSION@@/, options[:version])
-    .gsub(/@@REPOSITORY@@/, version_specific[:repository])
     .gsub(/@@SECRET_ACCESS_KEY@@/, options[:secret_access_key])
+    .gsub(/@@BUCKET@@/, options[:bucket])
+    .gsub(/@@VERSION@@/, options[:version])
     .gsub(/@@TAG@@/, options[:tag])
+    .gsub(/@@REPOSITORY@@/, version_specific[:repository])
 end
 
 def version_specific(version)
-  if version =~ /^1.6/
-    version_specific = VERSION_SPECIFIC[:six]
-  elsif version =~ /^1.7/
-    version_specific = VERSION_SPECIFIC[:seven]
-  elsif version =~ /^1.8/
-    version_specific = VERSION_SPECIFIC[:eight]
+  if version =~ /^3./
+    version_specific = VERSION_SPECIFIC[:three]
   else
     raise "Unable to process version '#{version}'"
   end
@@ -81,12 +66,12 @@ def parse_command_line
     banner "Usage: bundle exec #{$0} [OPTIONS]"
 
     on :a, :access_key=, 'AWS access key', :argument => true, :required => true
+    on :s, :secret_access_key=, 'AWS secret access key to use', :argument => true, :required => true
     on :b, :bucket=, 'AWS S3 bucket name to upload the distribution to', :argument => true, :required => true
     on :k, :key_name=, 'The name of the EC2 keypair to use when creating the instance.  This is optional and defaults to Cloud Foundry', :argument => true, :required => false, :default => KEY_NAME
-    on :n, :build_number=, 'The build number of the JDK to create', :argument => true, :required => true
-    on :s, :secret_access_key=, 'AWS secret access key to use', :argument => true, :required => true
-    on :t, :tag=, 'The repository tag to build from', :argument => true, :required => true
     on :v, :version=, 'The version of the JDK to create', :argument => true, :required => true
+    on :t, :tag=, 'The [github.com/mono/mono] repository tag to build from', :argument => true, :required => true
+
   end
 end
 
@@ -94,7 +79,7 @@ def start_instance(options)
   ec2 = AWS::EC2.new(
     :access_key_id => options[:access_key],
     :secret_access_key => options[:secret_access_key],
-    :region => 'eu-west-1'
+    :region => 'us-east-1'
   )
 
   print 'Starting instance... '
@@ -106,8 +91,10 @@ def start_instance(options)
     :user_data => build_multipart(options, version_specific(options[:version]))
   )
 
-  instance.tags['Name'] = "openjdk-#{options[:version]}-#{options[:build_number]}"
-  puts 'OK'
+  instance.tags['Name'] = "builder-mono-#{options[:version]}"
+  puts "Instance running at: #{instance.dns_name}"
+  puts "After about 5 minutes you can see build progress by running:"
+  puts "ssh ubuntu@#{instance.dns_name} -i ~/.ssh/#{options[:key_name]}.pem 'tail -f /tmp/build-output.txt'"
 end
 
 # Main execution
