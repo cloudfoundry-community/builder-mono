@@ -84,7 +84,7 @@ def start_instance(options)
 
   print 'Starting instance... '
   instance = ec2.instances.create(
-    :image_id => 'ami-881d13fc',
+    :image_id => 'ami-1ab3ce73', # us-east-1 lucid 10.04 LTS amd64 instance-store  20130704  ami-1ab3ce73
     :instance_type => 'm1.small',
     :security_groups => 'default',
     :key_name => options[:key_name],
