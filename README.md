@@ -7,7 +7,7 @@ To run the builder do the following:
 
 ```bash
 bundle install
-bundle exec ./build-mono.rb --access_key=$AWS_ACCESS_KEY --secret_access_key=$AWS_SECRET_KEY --bucket=ci-mono --version=3.0.12 --tag=mono-3.0.12 --key_name=labs-commander
+bundle exec ./build-mono.rb --access_key=$AWS_ACCESS_KEY --secret_access_key=$AWS_SECRET_KEY --bucket=ci-labs-buildpack-downloads --version=3.0.12 --tag=mono-3.0.12 --key_name=labs-commander
 ```
 
 The options are as follows and, unless otherwise specified, required:

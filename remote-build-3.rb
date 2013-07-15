@@ -110,6 +110,6 @@ end
 clone '@@REPOSITORY@@'
 checkout_tag '@@TAG@@'
 build '@@VERSION@@'
-#upload '@@ACCESS_KEY@@', '@@SECRET_ACCESS_KEY@@', '@@BUCKET@@', '@@VERSION@@'
+upload '@@ACCESS_KEY@@', '@@SECRET_ACCESS_KEY@@', '@@BUCKET@@', '@@VERSION@@'
 
 system `shutdown -h now`
