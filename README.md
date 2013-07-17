@@ -27,3 +27,4 @@ These are the details used for the currently existing builds.  This list _should
 |-----------------------------------------------------------------------------------------| ------------ | --- 
 |[3.0.10-full](https://github.com/cloudfoundry-community/builder-mono/tree/3.0.10-full)   | `3.0.10`     | `mono-3.0.10`
 |[3.0.12-full](https://github.com/cloudfoundry-community/builder-mono/tree/3.0.12-full)   | `3.0.12`     | `mono-3.0.12`
+|[3.1.2-full](https://github.com/cloudfoundry-community/builder-mono/tree/3.1.2-full)     | `3.1.2`     | `mono-3.1.2`
