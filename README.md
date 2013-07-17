@@ -7,7 +7,7 @@ To run the builder do the following:
 
 ```bash
 bundle install
-bundle exec ./build-mono.rb --access_key=$AWS_ACCESS_KEY --secret_access_key=$AWS_SECRET_KEY --bucket=ci-labs-buildpack-downloads --version=3.0.12 --tag=mono-3.0.12 --key_name=labs-commander
+bundle exec ./build-mono.rb --version=3.0.12 --tag=mono-3.0.12 --access_key=$AWS_ACCESS_KEY --secret_access_key=$AWS_SECRET_KEY --bucket=ci-labs-buildpack-downloads --key_name=labs-commander
 ```
 
 The options are as follows and, unless otherwise specified, required:
@@ -23,6 +23,7 @@ The options are as follows and, unless otherwise specified, required:
 ## Build Details
 These are the details used for the currently existing builds.  This list _should_ be kept up to date, but may not be.  Check before doing anything dangerous.
 
-| Mono Version | Tag
-| ------------ | --- 
-| `3.0.12`     | `mono-3.0.12`
+|repo tag                                                                                 | Mono Version | Tag
+|-----------------------------------------------------------------------------------------| ------------ | --- 
+|[3.0.10-full](https://github.com/cloudfoundry-community/builder-mono/tree/3.0.10-full)   | `3.0.10`     | `mono-3.0.10`
+|[3.0.12-full](https://github.com/cloudfoundry-community/builder-mono/tree/3.0.12-full)   | `3.0.12`     | `mono-3.0.12`
