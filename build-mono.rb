@@ -82,7 +82,7 @@ def start_instance(options)
     :region => 'us-east-1'
   )
 
-  print 'Starting instance... '
+  puts 'Starting instance... '
   instance = ec2.instances.create(
     :image_id => 'ami-1ab3ce73', # us-east-1 lucid 10.04 LTS amd64 instance-store  20130704  ami-1ab3ce73
     :instance_type => 'c1.medium',
@@ -90,11 +90,18 @@ def start_instance(options)
     :key_name => options[:key_name],
     :user_data => build_multipart(options, version_specific(options[:version]))
   )
-
   instance.tags['Name'] = "builder-mono-#{options[:version]}"
+
+  puts "Waiting for instance to be provisioned"
+  until instance.status == :running 
+    print "."
+    sleep 1 
+  end
+  puts "OK"
+
   puts "Instance running at: #{instance.dns_name}"
   puts "After about 5 minutes you can see build progress by running:"
-  puts "ssh ubuntu@#{instance.dns_name} -i ~/.ssh/#{options[:key_name]}.pem 'tail -f /tmp/build-output.txt'"
+  puts "ssh ubuntu@#{instance.dns_name} -oStrictHostKeyChecking=no -i ~/.ssh/#{options[:key_name]}.pem 'tail -f /tmp/build-output.txt'"
 end
 
 # Main execution
