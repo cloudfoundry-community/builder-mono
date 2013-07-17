@@ -46,7 +46,7 @@ export PATH=$MONO_PREFIX/bin:$PATH
 sudo mkdir -p $MONO_PREFIX
 
 ./autogen.sh --prefix=$MONO_PREFIX #{TO_LOG}
-./configure --prefix=$MONO_PREFIX --disable-boehm --enable-minimal=aot --disable-libraries --with-mcs-docs=no #{TO_LOG}
+./configure --prefix=$MONO_PREFIX --with-profile4=yes --with-profile4_5=no --with-moonlight=no --disable-boehm --enable-minimal=aot --disable-libraries --with-mcs-docs=no #{TO_LOG}
 make get-monolite-latest #{TO_LOG}
 make EXTERNAL_MCS="${PWD}/mcs/class/lib/monolite/gmcs.exe" #{TO_LOG}
 make install #{TO_LOG}

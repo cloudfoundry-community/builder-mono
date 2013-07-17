@@ -23,8 +23,9 @@ The options are as follows and, unless otherwise specified, required:
 ## Build Details
 These are the details used for the currently existing builds.  This list _should_ be kept up to date, but may not be.  Check before doing anything dangerous.
 
-|repo tag                                                                                 | Mono Version | Tag
-|-----------------------------------------------------------------------------------------| ------------ | --- 
-|[3.0.10-full](https://github.com/cloudfoundry-community/builder-mono/tree/3.0.10-full)   | `3.0.10`     | `mono-3.0.10`
-|[3.0.12-full](https://github.com/cloudfoundry-community/builder-mono/tree/3.0.12-full)   | `3.0.12`     | `mono-3.0.12`
-|[3.1.2-full](https://github.com/cloudfoundry-community/builder-mono/tree/3.1.2-full)     | `3.1.2`     | `mono-3.1.2`
+|repo tag                                                                                 | Mono Version | Tag          | Profile(s)            | Size(gz)
+|-----------------------------------------------------------------------------------------| ------------ | -------------| ----------------------| ---------------------
+|[3.0.10-full](https://github.com/cloudfoundry-community/builder-mono/tree/3.0.10-full)   | `3.0.10`     | `mono-3.0.10`| net2,net35,net4,net45 | 100 MB
+|[3.0.12-full](https://github.com/cloudfoundry-community/builder-mono/tree/3.0.12-full)   | `3.0.12`     | `mono-3.0.12`| net2,net35,net4,net45 | 60 MB
+|[3.1.2-full](https://github.com/cloudfoundry-community/builder-mono/tree/3.1.2-full)     | `3.1.2`      | `mono-3.1.2` | net2,net35,net4,net45 | 60 MB
+|[3.1.2-net4](https://github.com/cloudfoundry-community/builder-mono/tree/3.1.2-net4)     | `3.1.2`      | `mono-3.1.2` | net2,net35,net4       | 33 MB
