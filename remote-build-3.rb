@@ -7,6 +7,7 @@ require 'yaml'
 STDOUT.sync = true
 
 SOURCE_ROOT = '/tmp/mono'
+`echo "mono compile build output goes here..." > /tmp/build-output.txt`
 TO_LOG = '>> /tmp/build-output.txt 2>&1'
 
 def clone(repository)
@@ -45,7 +46,7 @@ export PATH=$MONO_PREFIX/bin:$PATH
 sudo mkdir -p $MONO_PREFIX
 
 ./autogen.sh --prefix=$MONO_PREFIX #{TO_LOG}
-./configure --prefix=$MONO_PREFIX --enable-minimal=aot --disable-libraries --with-sgen=no --with-mcs-docs=no #{TO_LOG}
+./configure --prefix=$MONO_PREFIX --disable-boehm --enable-minimal=aot --disable-libraries --with-mcs-docs=no #{TO_LOG}
 make get-monolite-latest #{TO_LOG}
 make EXTERNAL_MCS="${PWD}/mcs/class/lib/monolite/gmcs.exe" #{TO_LOG}
 make install #{TO_LOG}
