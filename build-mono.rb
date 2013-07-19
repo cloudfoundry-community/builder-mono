@@ -62,7 +62,7 @@ def version_specific(version)
 end
 
 def parse_command_line
-  Slop.parse :help => true do
+  options = Slop.parse :help => true do
     banner "Usage: bundle exec #{$0} [OPTIONS]"
 
     on :a, :access_key=, 'AWS access key', :argument => true, :required => true
@@ -73,6 +73,9 @@ def parse_command_line
     on :t, :tag=, 'The [github.com/mono/mono] repository tag to build from', :argument => true, :required => true
 
   end
+
+  raise "Invalid version '#{options[:version]}': must not contain - (use _ instead) " if options[:version].include?('-')
+  options
 end
 
 def start_instance(options)
