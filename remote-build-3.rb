@@ -35,7 +35,7 @@ def build(version)
   system <<-EOF
 cd #{SOURCE_ROOT}
 
-MONO_PREFIX=/app/runtimes/mono
+MONO_PREFIX=/app/vendor/mono
 export DYLD_LIBRARY_FALLBACK_PATH=$MONO_PREFIX/lib:$DYLD_LIBRARY_FALLBACK_PATH
 export LD_LIBRARY_PATH=$MONO_PREFIX/lib:$LD_LIBRARY_PATH
 export C_INCLUDE_PATH=$MONO_PREFIX/include
@@ -51,7 +51,7 @@ make get-monolite-latest #{TO_LOG}
 make EXTERNAL_MCS="${PWD}/mcs/class/lib/monolite/gmcs.exe" #{TO_LOG}
 make install #{TO_LOG}
 
-tar --transform='s,^app/runtimes/,,' -czvf #{dist version} /app/runtimes/mono/ #{TO_LOG}
+tar --transform='s,^app/vendor/,,' -czvf #{dist version} /app/vendor/mono/ #{TO_LOG}
   EOF
 
   abort "FAIL" unless $? == 0
