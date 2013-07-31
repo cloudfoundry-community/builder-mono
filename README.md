@@ -7,7 +7,7 @@ To run the builder do the following:
 
 ```bash
 bundle install
-bundle exec ./build-mono.rb --version=3.1.2_net4 --tag=mono-3.1.2 --access_key=$AWS_ACCESS_KEY --secret_access_key=$AWS_SECRET_KEY --bucket=ci-labs-buildpack-downloads --key_name=labs-commander
+bundle exec ./build-mono.rb --version=3.2.0_net4 --tag=mono-3.2.0 --access_key=$AWS_ACCESS_KEY --secret_access_key=$AWS_SECRET_KEY --bucket=ci-labs-buildpack-downloads --key_name=labs-commander
 ```
 
 :exclamation: Make sure that the files uploaded to S3 are public!
@@ -29,3 +29,5 @@ These are the details used for the currently existing builds.  This list _should
 |repo tag                                                                                 | Mono Version | Tag          | Profile(s)            | Size(gz)
 |-----------------------------------------------------------------------------------------| ------------ | -------------| ----------------------| ---------------------
 |[3.1.2_net4](https://github.com/cloudfoundry-community/builder-mono/tree/3.1.2_net4)     | `3.1.2`      | `mono-3.1.2` | net2,net35,net4       | 33 MB
+|[3.2.0_net4](https://github.com/cloudfoundry-community/builder-mono/tree/3.2.0_net4)     | `3.2.0`      | `mono-3.2.0` | net2,net35,net4       | 33 MB
+|[3.2.0_full](https://github.com/cloudfoundry-community/builder-mono/tree/3.2.0_net4)     | `3.2.0`      | `mono-3.2.0` | net2,net35,net4,net45 | 33 MB
