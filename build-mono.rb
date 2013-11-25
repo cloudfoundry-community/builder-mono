@@ -30,7 +30,7 @@ Content-Type: text/x-shellscript; charset="UTF-8"
 Content-Disposition: attachment
 
 #!/usr/bin/env bash
-gem install aws-sdk --no-ri --no-rdoc
+gem install aws-sdk --version '=1.11.2' --no-ri --no-rdoc
 
 --===============7910318705544163955==
 MIME-Version: 1.0
