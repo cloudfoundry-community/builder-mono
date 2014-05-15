@@ -51,6 +51,11 @@ make get-monolite-latest #{TO_LOG}
 make EXTERNAL_MCS="${PWD}/mcs/class/lib/monolite/gmcs.exe" #{TO_LOG}
 make install #{TO_LOG}
 
+strip $MONO_PREFIX/bin/mono #{TO_LOG}
+strip $MONO_PREFIX/lib/libikvm-native.so #{TO_LOG}
+strip $MONO_PREFIX/lib/libMonoPosixHelper.so #{TO_LOG}
+strip $MONO_PREFIX/lib/libMonoSupportW.so #{TO_LOG}
+
 tar --transform='s,^app/vendor/,,' -czvf #{dist version} /app/vendor/mono/ #{TO_LOG}
   EOF
 
